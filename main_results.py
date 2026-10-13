@@ -1,6 +1,6 @@
-"""Extended analysis: validation-based thresholds, paired bootstrap, calibration,
-robustness checks, additional baselines, expected-loss model.
-Builds on analysis.py's classifier and tier coding. Seed fixed at 42."""
+"""Reproduces all results in Section V (Tables 4–7): validation-based thresholds,
+paired bootstrap, calibration, robustness checks, baselines and cost model.
+Reads data/train.csv, data/test.csv and intent_coding.csv. Seed fixed at 42."""
 import numpy as np, pandas as pd, json
 from sklearn.feature_extraction.text import TfidfVectorizer
 from sklearn.linear_model import LogisticRegression
@@ -10,8 +10,8 @@ SEED = 42
 rng = np.random.default_rng(SEED)
 
 tr = pd.read_csv('data/train.csv'); te = pd.read_csv('data/test.csv')
-src = open('analysis.py').read()
-CODE = eval("{" + src.split("CODE = {")[1].split("}\nlabels")[0] + "}")
+_ic = pd.read_csv('intent_coding.csv')
+CODE = {r.intent: (int(r.C), int(r.U), int(r.I)) for r in _ic.itertuples()}
 tier_of = {k: max(v) for k, v in CODE.items()}
 labels = sorted(tr.category.unique())
 assert set(labels) == set(CODE)
