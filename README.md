@@ -1,5 +1,7 @@
 # Risk-Tiered Authority Allocation for Human–AI Customer Support
 
+[![DOI](https://zenodo.org/badge/1415157619.svg)](https://doi.org/10.5281/zenodo.23334096)
+
 Code and data for the paper:
 
 > **Human–AI Collaborative Customer Support for Digital Asset Platforms: A Trust-Aware Framework for Security, Explainability, and Service Reliability**
@@ -9,6 +11,9 @@ The paper argues that on digital asset platforms, customer support is a security
 boundary, and that an AI assistant's authority should be set by the **consequence,
 uncertainty and irreversibility** of a request rather than by the AI's confidence.
 This repository reproduces the results and figures in Section V of the paper.
+
+The version used for the paper is archived on Zenodo as release v1.0:
+[doi.org/10.5281/zenodo.23334097](https://doi.org/10.5281/zenodo.23334097).
 
 ## Main result
 
@@ -41,7 +46,7 @@ under 1%.
 ├── analysis2.py                           Validation-selected results (Tables 4–7)
 ├── finetuned_transformer_baseline.py      Optional BERT/RoBERTa classifier (GPU recommended)
 ├── llm_zeroshot_baseline.py               Optional zero-shot LLM classifier (API key required)
-└── results/                               Output files from the scripts above
+└── results/                               Output files from the scripts above, including Fig. 3
 ```
 
 ## Setup
@@ -99,7 +104,8 @@ python analysis.py
 | `results_sensitivity.csv` | Policies at τ = 0.6–0.9 and θ = 0.05, 0.10, 0.20 |
 | `tier_confusion.csv` | True tier (rows) against the tier of the predicted intent (columns) |
 
-Output files are written to the working directory.
+Both scripts write their output files to the working directory. Copies of every output,
+as used in the paper, are in `results/`.
 
 ### Column names
 
@@ -170,5 +176,19 @@ If you use this code or the tier coding, please cite the paper:
   journal = {IEEE Access},
   year    = {2026},
   note    = {Under review}
+}
+```
+
+To cite this code and data specifically (release v1.0):
+
+```bibtex
+@software{dave2026code,
+  author    = {Nandish Dave},
+  title     = {risk-tiered-support-routing: Code and data for risk-tiered human--AI customer support},
+  version   = {v1.0},
+  year      = {2026},
+  publisher = {Zenodo},
+  doi       = {10.5281/zenodo.23334097},
+  url       = {https://doi.org/10.5281/zenodo.23334097}
 }
 ```
