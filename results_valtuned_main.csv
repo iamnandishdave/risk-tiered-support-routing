@@ -1,0 +1,4 @@
+policy,automation,uar_t3,uar_t23,harm,over_esc_t1
+P0 confidence-only,53.31,54.22,52.3,0.24,44.91
+P1 predicted-intent tier,32.56,0.78,0.92,1.79,12.05
+P2 risk-conservative tier,32.89,0.94,0.71,1.38,10.8

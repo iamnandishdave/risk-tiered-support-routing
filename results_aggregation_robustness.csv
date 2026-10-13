@@ -1,0 +1,4 @@
+rule,automation,uar_t3,uar_t23,harm,over_esc_t1
+MAX (used in paper),32.56,0.78,0.92,1.79,12.05
+SUM (C+U+I thresholded),32.56,0.71,0.92,1.79,12.05
+WEIGHTED (0.5I+0.3U+0.2C),67.47,1.61,1.67,0.58,12.46

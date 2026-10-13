@@ -1,0 +1,5 @@
+baseline,automation,uar_t3,uar_t23,harm,over_esc_t1
+"P1 (confidence+predicted-tier, this paper)",32.56,0.78,0.92,1.79,12.05
+Intent allowlist (no confidence gate),36.33,2.03,2.14,3.75,3.84
+Selective prediction (margin-based deferral),32.82,0.94,0.92,1.78,11.34
+"Split-conformal (90% coverage, singleton+Tier1 only)",34.58,1.25,1.28,2.35,7.14

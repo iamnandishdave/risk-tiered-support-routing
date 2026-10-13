@@ -1,0 +1,4 @@
+policy,monthly_expected_cost_usd,unsafe_autonomous_cases_per_100000,automated_tickets_per_100000
+P0 confidence-only,16837026.0,33279,53312
+P1 predicted-intent tier,568461.0,584,32565
+P2 risk-conservative tier,502292.0,455,32890
