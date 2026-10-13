@@ -1,0 +1,15 @@
+# Core requirements for main_results.py (Python 3.11).
+# These exact versions reproduce the numbers reported in the paper.
+numpy==2.4.4
+pandas==3.0.2
+scipy==1.17.1
+scikit-learn==1.8.0
+
+# Needed only for figure3_threshold_sweep.py
+matplotlib
+
+# Needed only for finetuned_transformer_baseline.py (GPU recommended):
+# transformers
+# torch
+# datasets
+# accelerate
