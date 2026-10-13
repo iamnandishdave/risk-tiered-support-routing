@@ -1,0 +1,21 @@
+tau,theta,policy,automation,uar_t3,uar_t23,harm,over_esc_t1,under_tier_t3
+0.6,,P0 confidence-only,87.2,87.3,86.6,2.1,11.8,
+0.6,,P1 predicted-intent tier,32.3,0.8,0.9,1.7,12.8,4.5
+0.6,0.05,P2 risk-conservative tier,29.1,0.2,0.2,0.4,20.4,0.8
+0.6,0.1,P2 risk-conservative tier,31.0,0.3,0.5,0.9,15.5,1.4
+0.6,0.2,P2 risk-conservative tier,31.9,0.8,0.7,1.3,13.5,3.1
+0.7,,P0 confidence-only,82.0,81.9,81.3,1.6,16.7,
+0.7,,P1 predicted-intent tier,30.6,0.8,0.7,1.5,17.0,4.5
+0.7,0.05,P2 risk-conservative tier,28.1,0.2,0.2,0.3,23.0,0.8
+0.7,0.1,P2 risk-conservative tier,29.7,0.3,0.4,0.9,18.9,1.4
+0.7,0.2,P2 risk-conservative tier,30.5,0.8,0.6,1.3,17.3,3.1
+0.8,,P0 confidence-only,76.3,76.4,75.4,1.0,22.1,
+0.8,,P1 predicted-intent tier,28.5,0.6,0.5,1.0,22.3,4.5
+0.8,0.05,P2 risk-conservative tier,27.0,0.2,0.2,0.4,26.1,0.8
+0.8,0.1,P2 risk-conservative tier,28.1,0.2,0.3,0.7,23.1,1.4
+0.8,0.2,P2 risk-conservative tier,28.5,0.6,0.5,1.0,22.3,3.1
+0.9,,P0 confidence-only,64.6,65.0,63.4,0.5,33.3,
+0.9,,P1 predicted-intent tier,24.3,0.0,0.2,0.4,33.4,4.5
+0.9,0.05,P2 risk-conservative tier,24.1,0.0,0.1,0.3,34.0,0.8
+0.9,0.1,P2 risk-conservative tier,24.3,0.0,0.2,0.4,33.4,1.4
+0.9,0.2,P2 risk-conservative tier,24.3,0.0,0.2,0.4,33.4,3.1
