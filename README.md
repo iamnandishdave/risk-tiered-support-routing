@@ -8,7 +8,7 @@ Code and data for the paper:
 The paper argues that on digital asset platforms, customer support is a security
 boundary, and that an AI assistant's authority should be set by the **consequence,
 uncertainty and irreversibility** of a request rather than by the AI's confidence.
-This repository reproduces every result in Section V of the paper.
+This repository reproduces the results and figures in Section V of the paper.
 
 ## Main result
 
@@ -37,9 +37,10 @@ under 1%.
 │   └── test.csv                           Banking77 test split (3,080 queries)
 ├── intent_coding.csv                      C, U, I scores and tier for all 77 intents
 ├── Supplementary_S1_Intent_Coding.xlsx    Same coding, with columns for independent coders
-├── main_results.py                        Reproduces all results in Section V
-├── figure3_threshold_sweep.py             Reproduces Fig. 3
+├── analysis.py                            Fig. 3 and the fixed-threshold results
+├── analysis2.py                           Validation-selected results (Tables 4–7)
 ├── finetuned_transformer_baseline.py      Optional BERT/RoBERTa classifier (GPU recommended)
+├── llm_zeroshot_baseline.py               Optional zero-shot LLM classifier (API key required)
 └── results/                               Output files from the scripts above
 ```
 
@@ -55,11 +56,17 @@ pip install -r requirements.txt
 
 ## Reproducing the results
 
+Both scripts run in a few minutes on a laptop CPU. The random seed is fixed at 42.
+Results were produced with the exact package versions in `requirements.txt`; other
+scikit-learn versions may give slightly different numbers.
+
+### Tables 4–7 (validation-selected thresholds)
+
 ```bash
-python main_results.py
+python analysis2.py
 ```
 
-Runs in a few minutes on a laptop CPU. The first lines of output should read:
+The first lines of output should read:
 
 ```
 train_fit=8002  val=2001  test=3080 (test untouched until step 4)
@@ -67,14 +74,7 @@ Selected on validation set (not test): P0 tau=0.95, P1 tau=0.57, P2 tau=0.5 thet
 Final test accuracy (refit on full train): 0.9153
 ```
 
-The random seed is fixed at 42. Results were produced with the exact package versions
-in `requirements.txt`; other scikit-learn versions may give slightly different numbers.
-
-### Which output reproduces which result
-
-Output files are written to the working directory.
-
-| File | Paper |
+| Output | Paper |
 |---|---|
 | `results_valtuned_main.csv` | Table 4 (under-tiering rates are printed to the console) |
 | `results_paired_bootstrap.csv` | Table 5 |
@@ -86,6 +86,21 @@ Output files are written to the working directory.
 | `results_aggregation_robustness.csv` | Alternative aggregation rules, Section V-C |
 | `selected_params.json` | Thresholds selected on the validation set |
 
+### Fig. 3 and fixed-threshold results
+
+```bash
+python analysis.py
+```
+
+| Output | Content |
+|---|---|
+| `figure3_threshold_sweep.png` | Fig. 3: effect of the confidence threshold τ |
+| `results_main.csv` | All three policies at fixed τ = 0.8, θ = 0.10, with 95% bootstrap intervals |
+| `results_sensitivity.csv` | Policies at τ = 0.6–0.9 and θ = 0.05, 0.10, 0.20 |
+| `tier_confusion.csv` | True tier (rows) against the tier of the predicted intent (columns) |
+
+Output files are written to the working directory.
+
 ### Column names
 
 | Column | Meaning |
@@ -95,6 +110,7 @@ Output files are written to the working directory.
 | `uar_t23` | Unsafe automation: share of true Tier 2–3 requests resolved autonomously |
 | `harm` | Residual harmful misclassification: share of autonomous resolutions that were wrong and had a true tier of 2 or 3 (secondary diagnostic) |
 | `over_esc_t1` | Over-escalation: share of true Tier 1 requests not resolved autonomously |
+| `under_tier_t3` | Under-tiering: share of true Tier 3 requests routed below Tier 3 |
 
 All values are percentages.
 
@@ -113,16 +129,22 @@ coding with columns for independent coders and an automatic agreement calculatio
 Intent labels are kept exactly as released in Banking77, including
 `Refund_not_showing_up` and `reverted_card_payment?`.
 
-## Optional: fine-tuned transformer classifier
+## Optional baselines
 
-`finetuned_transformer_baseline.py` trains BERT (or RoBERTa) on the same split and
-saves validation and test probability matrices that can replace the TF-IDF
-probabilities in `main_results.py`. A GPU is recommended.
+These scripts were not used for the results reported in the paper.
 
-```bash
-pip install transformers torch datasets accelerate
-python finetuned_transformer_baseline.py
-```
+- `finetuned_transformer_baseline.py` trains BERT (or RoBERTa) on the same split and
+  saves validation and test probability matrices that can replace the TF-IDF
+  probabilities in `analysis2.py`. A GPU is recommended.
+
+  ```bash
+  pip install transformers torch datasets accelerate
+  python finetuned_transformer_baseline.py
+  ```
+
+- `llm_zeroshot_baseline.py` labels queries with a large language model's zero-shot
+  intent prediction and self-reported confidence. It requires an API key and supports
+  P0 and P1 routing only.
 
 ## Data and licence
 
